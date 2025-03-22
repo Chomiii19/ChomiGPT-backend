@@ -1,11 +1,19 @@
 import cookieParser from "cookie-parser";
 import express from "express";
+import cors from "cors";
 import globalErrorHandler from "./controllers/globalErrorHandler";
 import AppError from "./utils/appError";
 import authRoutes from "./routes/authRoutes";
 import appRoutes from "./routes/appRoutes";
 
 const app = express();
+app.set("trust proxy", 1);
+app.use(
+  cors({
+    origin: ["https://rbac-chomi.vercel.app", "http://localhost:5173"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
 
