@@ -73,7 +73,7 @@ const continueChat = catchAsync(async (req, res, next) => {
 
     await chat.save();
 
-    return res.status(200).json({ data: chat });
+    return res.status(200).json({ data: { response: botResponse } });
   } else {
     res.status(200).json({ data: { response: botResponse } });
   }
