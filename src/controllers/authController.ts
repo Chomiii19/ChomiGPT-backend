@@ -52,6 +52,8 @@ const logout = catchAsync(async (req, res, next) => {
     sameSite: "none" as "none",
     path: "/",
   });
+
+  res.status(200).json({ message: "Logged out successfully" });
 });
 
 export { login, signup, logout };
