@@ -44,7 +44,11 @@ const getAllChats = catchAsync(async (req, res, next) => {
   const startOfToday = new Date(today.setHours(0, 0, 0, 0));
   const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
 
-  const groupedChats = {
+  const groupedChats: {
+    today: typeof chats;
+    thisMonth: typeof chats;
+    older: typeof chats;
+  } = {
     today: [],
     thisMonth: [],
     older: [],
