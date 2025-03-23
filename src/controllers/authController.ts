@@ -25,7 +25,7 @@ const login = catchAsync(async (req, res, next) => {
   if (!username || !password)
     return next(new AppError("Invalid empty fields", 400));
 
-  const user = await User.findOne({ username });
+  const user = await User.findOne({ username }).select("+password");
 
   if (!user || !(await user.comparePassword(password)))
     return next(new AppError("Invalid credentials", 400));
