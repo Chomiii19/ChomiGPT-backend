@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/api/v1", authRoutes);
-app.use("/api/v1/app", appRoutes);
+app.use("/api/v1/app", protect, appRoutes);
 app.get("/api/v1/getUser", protect, protectPage);
 app.use("*", (req, res, next) =>
   next(new AppError(`Cannot find ${req.originalUrl} from the server`, 404))
