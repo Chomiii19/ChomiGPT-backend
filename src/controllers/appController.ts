@@ -37,7 +37,7 @@ const getAllChats = catchAsync(async (req, res, next) => {
   if (!req.user) return next(new AppError("User not logged in", 403));
 
   const chats = await Chat.find({ username: req.user.username })
-    .select("title createdAt")
+    .select("title createdAt _id")
     .sort({ createdAt: -1 });
 
   const today = new Date();
