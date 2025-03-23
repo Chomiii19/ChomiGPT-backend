@@ -12,7 +12,7 @@ const app = express();
 app.set("trust proxy", 1);
 app.use(
   cors({
-    origin: ["https://rbac-chomi.vercel.app", "http://localhost:5173"],
+    origin: ["https://chomigpt.vercel.app", "http://localhost:5173"],
     credentials: true,
   })
 );
