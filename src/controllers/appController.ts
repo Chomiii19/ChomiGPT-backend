@@ -25,6 +25,11 @@ const newChat = catchAsync(async (req, res, next) => {
       ],
     });
 
+    if (chat.chatLogs.length > 0) {
+      chat.chatLogs.shift();
+      await chat.save();
+    }
+
     return res.status(201).json({ status: "Success", data: chat });
   } else {
     return res
