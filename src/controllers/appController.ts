@@ -40,7 +40,29 @@ const getAllChats = catchAsync(async (req, res, next) => {
     .select("title createdAt")
     .sort({ createdAt: -1 });
 
-  res.status(200).json({ status: "Success", data: chats });
+  const today = new Date();
+  const startOfToday = new Date(today.setHours(0, 0, 0, 0));
+  const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+
+  const groupedChats = {
+    today: [],
+    thisMonth: [],
+    older: [],
+  };
+
+  chats.forEach((chat) => {
+    const chatDate = new Date(chat.createdAt);
+
+    if (chatDate >= startOfToday) {
+      groupedChats.today.push(chat);
+    } else if (chatDate >= startOfMonth) {
+      groupedChats.thisMonth.push(chat);
+    } else {
+      groupedChats.older.push(chat);
+    }
+  });
+
+  res.status(200).json({ status: "Success", data: groupedChats });
 });
 
 const getChat = catchAsync(async (req, res, next) => {
